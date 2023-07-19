@@ -1,20 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
-import { fetchDataFromAPI, useFetchPeople } from '../utils/useFetchPeople';
+import { useFetchPeople } from '../utils/useFetchPeople';
 import { PersonCard } from './PersonCard';
 import { SearchTermContext } from '../utils/SearchTermContext';
 import { SortToggleContext } from '../utils/SortToggleContext';
 import { personModel } from '../utils/model';
 import { PeopleContext } from '../utils/PeopleContext';
+import { fetchDataFromAPI } from '../utils/helper';
 interface Props{
 
 }
 
 export const Body : React.FC<Props> = () => {
     const { people, setPeople } = useContext(PeopleContext)
-    const [filteredPeople , setFilteredPeople] = useState(people)
     const {searchTerm} = useContext(SearchTermContext)
     const {sort} = useContext(SortToggleContext)
     useFetchPeople(10)
+
+    const [filteredPeople , setFilteredPeople] = useState(people)
 
     useEffect(()=>{
         setFilteredPeople(people.filter(person=>

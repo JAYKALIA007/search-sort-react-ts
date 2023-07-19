@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 type SortToggleContextType = {
     sort: boolean,
-    setSort:(c: boolean) => void
+    setSort:React.Dispatch<React.SetStateAction<boolean>>
 }
 export const SortToggleContext = createContext<SortToggleContextType>({
     sort : false,

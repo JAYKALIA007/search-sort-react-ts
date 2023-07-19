@@ -1,7 +1,7 @@
 import { createContext } from "react";
 type SearchContextType = {
     searchTerm: string
-    setSearchTerm:(c: string) => void
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>
   }
 export const SearchTermContext = createContext<SearchContextType>({
     searchTerm:'',

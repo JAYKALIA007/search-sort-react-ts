@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Header } from './components/Header';
+import { Body } from './components/Body';
+import { SearchTermContext } from './utils/SearchTermContext';
+import { SortToggleContext } from './utils/SortToggleContext';
+import { personModel } from './utils/model';
+import { PeopleContext } from './utils/PeopleContext';
 
 function App() {
+
+  const [ searchTerm, setSearchTerm ] = useState<string>('')
+  const [ sort, setSort ] = useState<boolean>(false)
+  const [ people, setPeople ] = useState<personModel[]>([])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SearchTermContext.Provider value={{searchTerm, setSearchTerm }}>
+      <SortToggleContext.Provider value={{sort, setSort}} >
+        <PeopleContext.Provider value={{people,setPeople}} >
+          <div>
+            <Header/>
+            <Body/> 
+          </div>
+        </PeopleContext.Provider>
+      </SortToggleContext.Provider>
+    </SearchTermContext.Provider>
   );
 }
 
